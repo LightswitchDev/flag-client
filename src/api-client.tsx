@@ -1,6 +1,6 @@
 import base64 from 'base-64';
 
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = 'https://flag-api-vykaoik56q-uc.a.run.app';
 
 export type Variant = {
     id: string;
@@ -22,15 +22,18 @@ export type LightswitchConfig = {
     clientId: string;
     apiKey: string;
     frequencyInSeconds?: number;
+    url?: string;
 };
 
 export class LightswitchClient {
     private _authString: string;
     private _lightswitches: Switch[] = [];
     private _subscribers: ((lightswitches: Switch[]) => void)[] = [];
+    private _url: string;
     constructor(config: LightswitchConfig) {
-        const { clientId, apiKey, frequencyInSeconds = 5 * 60 } = config;
+        const { clientId, apiKey, frequencyInSeconds = 5 * 60, url } = config;
         this._authString = `${clientId}:${apiKey}`;
+        this._url = url ? url : BASE_URL;
         setInterval(this._setSwitches, frequencyInSeconds * 1000);
     }
 
@@ -59,7 +62,7 @@ export class LightswitchClient {
     };
 
     private _getSwitches = async () => {
-        const res = await fetch(`${BASE_URL}/switches`, {
+        const res = await fetch(`${this._url}/switches`, {
             headers: new Headers({
                 Authorization: `Basic ${base64.encode(this._authString)}`,
             }),

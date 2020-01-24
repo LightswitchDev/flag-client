@@ -16,11 +16,13 @@ export declare type LightswitchConfig = {
     clientId: string;
     apiKey: string;
     frequencyInSeconds?: number;
+    url?: string;
 };
 export declare class LightswitchClient {
     private _authString;
     private _lightswitches;
     private _subscribers;
+    private _url;
     constructor(config: LightswitchConfig);
     subscribe: (onUpdate: (lightSwitches: Switch[]) => void) => void;
     getSwitch: (key: string) => Switch | undefined;

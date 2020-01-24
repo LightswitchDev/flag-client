@@ -216,7 +216,7 @@ var base64 = createCommonjsModule(function (module, exports) {
 }(commonjsGlobal));
 });
 
-var BASE_URL = 'http://localhost:4000';
+var BASE_URL = 'https://flag-api-vykaoik56q-uc.a.run.app';
 var LightswitchClient = /** @class */ (function () {
     function LightswitchClient(config) {
         var _this = this;
@@ -247,7 +247,7 @@ var LightswitchClient = /** @class */ (function () {
             var res, data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(BASE_URL + "/switches", {
+                    case 0: return [4 /*yield*/, fetch(this._url + "/switches", {
                             headers: new Headers({
                                 Authorization: "Basic " + base64.encode(this._authString),
                             }),
@@ -266,8 +266,9 @@ var LightswitchClient = /** @class */ (function () {
                 }
             });
         }); };
-        var clientId = config.clientId, apiKey = config.apiKey, _a = config.frequencyInSeconds, frequencyInSeconds = _a === void 0 ? 5 * 60 : _a;
+        var clientId = config.clientId, apiKey = config.apiKey, _a = config.frequencyInSeconds, frequencyInSeconds = _a === void 0 ? 5 * 60 : _a, url = config.url;
         this._authString = clientId + ":" + apiKey;
+        this._url = url ? url : BASE_URL;
         setInterval(this._setSwitches, frequencyInSeconds * 1000);
     }
     return LightswitchClient;
