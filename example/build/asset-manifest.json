@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/lightswitch-client/static/css/main.2c6a48fe.chunk.css",
+    "main.js": "/lightswitch-client/static/js/main.e047832a.chunk.js",
+    "main.js.map": "/lightswitch-client/static/js/main.e047832a.chunk.js.map",
+    "runtime-main.js": "/lightswitch-client/static/js/runtime-main.67160bd5.js",
+    "runtime-main.js.map": "/lightswitch-client/static/js/runtime-main.67160bd5.js.map",
+    "static/js/2.bf2bddaa.chunk.js": "/lightswitch-client/static/js/2.bf2bddaa.chunk.js",
+    "static/js/2.bf2bddaa.chunk.js.map": "/lightswitch-client/static/js/2.bf2bddaa.chunk.js.map",
+    "index.html": "/lightswitch-client/index.html",
+    "precache-manifest.673c89278bdb41f358596c57bed6f793.js": "/lightswitch-client/precache-manifest.673c89278bdb41f358596c57bed6f793.js",
+    "service-worker.js": "/lightswitch-client/service-worker.js",
+    "static/css/main.2c6a48fe.chunk.css.map": "/lightswitch-client/static/css/main.2c6a48fe.chunk.css.map",
+    "static/js/2.bf2bddaa.chunk.js.LICENSE": "/lightswitch-client/static/js/2.bf2bddaa.chunk.js.LICENSE",
+    "static/js/main.e047832a.chunk.js.LICENSE": "/lightswitch-client/static/js/main.e047832a.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.67160bd5.js",
+    "static/js/2.bf2bddaa.chunk.js",
+    "static/css/main.2c6a48fe.chunk.css",
+    "static/js/main.e047832a.chunk.js"
+  ]
+}
