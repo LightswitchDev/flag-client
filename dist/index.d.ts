@@ -1,2 +1,2 @@
-import { getSwitches, getSwitch, LightswitchProvider, LightswitchContext, LightswitchClient } from './LightswitchContext';
-export { getSwitches, getSwitch, LightswitchProvider, LightswitchContext, LightswitchClient };
+import { useSwitches, useSwitch, LightswitchProvider, LightswitchContext, LightswitchClient } from './LightswitchContext';
+export { useSwitch, useSwitches, LightswitchProvider, LightswitchContext, LightswitchClient };

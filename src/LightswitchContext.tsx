@@ -6,14 +6,29 @@ type Props = {
     lightswitchClient: LightswitchClient;
 };
 
-const getSwitches = (keys?: string[]) => {
+const useSwitches = (keys: string[], defaultValues: any[]) => {
     const { lightswitchClient } = useContext(LightswitchContext);
-    return lightswitchClient?.getSwitches(keys);
+    const lightswitches = lightswitchClient?.getSwitches(keys);
+
+    return keys.reduce((values, key, i) => {
+        const lightswitch = lightswitches?.find(lightswitch => lightswitch.key === key);
+        const defaultValue = defaultValues[i];
+        values[key] = _evaluateSwitch(lightswitch, defaultValue);
+        return values;
+    }, {});
 };
 
-const getSwitch = (key: string) => {
+const _evaluateSwitch = (lightswitch: Switch | undefined = undefined, defaultValue: any) => {
+    if (lightswitch?.type === 'Boolean') {
+        return lightswitch.enabled;
+    } else {
+        return defaultValue;
+    }
+};
+const useSwitch = (key: string, defaultValue: any) => {
     const { lightswitchClient } = useContext(LightswitchContext);
-    return lightswitchClient?.getSwitch(key);
+    const lightswitch = lightswitchClient?.getSwitch(key);
+    return _evaluateSwitch(lightswitch, defaultValue);
 };
 
 const LightswitchContext = createContext<{ lightswitches?: Switch[]; lightswitchClient?: LightswitchClient }>({});
@@ -29,4 +44,4 @@ const LightswitchProvider: React.FC<Props> = ({ lightswitchClient, children }) =
     return <Provider value={{ lightswitches, lightswitchClient }}>{children}</Provider>;
 };
 
-export { getSwitches, getSwitch, LightswitchContext, LightswitchProvider, LightswitchClient };
+export { useSwitches, useSwitch, LightswitchContext, LightswitchProvider, LightswitchClient };

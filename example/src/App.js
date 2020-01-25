@@ -1,21 +1,22 @@
 import React from 'react';
 
-import { LightswitchClient, LightswitchProvider, getSwitch } from '@lightswitch/client';
+import { LightswitchClient, LightswitchProvider, useSwitch, useSwitches } from '@lightswitch/client';
 
 const client = new LightswitchClient({
-    clientId: 'ck5nk1ei90022qcw1vrqqbp1f',
-    apiKey: '181d0f0e-709d-404c-8724-5d82d6f4252a',
-    frequencyInSeconds: 3,
+    clientId: 'ck5ri3mxo00320rs6cd2p8t3s',
+    apiKey: '2a2525d6-82e3-48c2-a98e-69911098e94d',
+    frequencyInSeconds: 10, //value just for testing
 });
 
 const Test = () => {
-    const test1 = getSwitch('test1');
-    const test2 = getSwitch('test2');
-
+    const test1 = useSwitch('test1', false);
+    const test2 = useSwitch('test2', true);
+    // Fetch multiple at once
+    // const {test1, test2} = useSwitches(['test1', 'test2'], [false, true]);
     return (
         <div>
-            {test1 && test1.enabled ? <div>Dana's First Test is Enabled</div> : <div>Dana's Test is Disabled</div>}
-            {test2 && test2.enabled ? <div>Dana's Second Test is Now Running</div> : <div></div>}
+            {test1 ? <div>Dana's First Test is Enabled</div> : <div>Dana's Test is Disabled</div>}
+            {test2 ? <div>Dana's Second Test is Now Running</div> : <div></div>}
         </div>
     );
 };

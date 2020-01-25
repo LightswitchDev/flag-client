@@ -281,15 +281,33 @@ var LightswitchClient = /** @class */ (function () {
     return LightswitchClient;
 }());
 
-var getSwitches = function (keys) {
+var useSwitches = function (keys, defaultValues) {
     var _a;
     var lightswitchClient = React.useContext(LightswitchContext).lightswitchClient;
-    return (_a = lightswitchClient) === null || _a === void 0 ? void 0 : _a.getSwitches(keys);
+    var lightswitches = (_a = lightswitchClient) === null || _a === void 0 ? void 0 : _a.getSwitches(keys);
+    return keys.reduce(function (values, key, i) {
+        var _a;
+        var lightswitch = (_a = lightswitches) === null || _a === void 0 ? void 0 : _a.find(function (lightswitch) { return lightswitch.key === key; });
+        var defaultValue = defaultValues[i];
+        values[key] = _evaluateSwitch(lightswitch, defaultValue);
+        return values;
+    }, {});
 };
-var getSwitch = function (key) {
+var _evaluateSwitch = function (lightswitch, defaultValue) {
+    if (lightswitch === void 0) { lightswitch = undefined; }
+    var _a;
+    if (((_a = lightswitch) === null || _a === void 0 ? void 0 : _a.type) === 'Boolean') {
+        return lightswitch.enabled;
+    }
+    else {
+        return defaultValue;
+    }
+};
+var useSwitch = function (key, defaultValue) {
     var _a;
     var lightswitchClient = React.useContext(LightswitchContext).lightswitchClient;
-    return (_a = lightswitchClient) === null || _a === void 0 ? void 0 : _a.getSwitch(key);
+    var lightswitch = (_a = lightswitchClient) === null || _a === void 0 ? void 0 : _a.getSwitch(key);
+    return _evaluateSwitch(lightswitch, defaultValue);
 };
 var LightswitchContext = React.createContext({});
 var Provider = LightswitchContext.Provider;
@@ -308,6 +326,6 @@ var LightswitchProvider = function (_a) {
 exports.LightswitchClient = LightswitchClient;
 exports.LightswitchContext = LightswitchContext;
 exports.LightswitchProvider = LightswitchProvider;
-exports.getSwitch = getSwitch;
-exports.getSwitches = getSwitches;
+exports.useSwitch = useSwitch;
+exports.useSwitches = useSwitches;
 //# sourceMappingURL=index.js.map
